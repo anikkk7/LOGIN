@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Login Experience</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <div class="cursor-glow" id="cursorGlow"></div>
+    <div class="grid-overlay"></div>
+    <div class="ambient ambient-left"></div>
+    <div class="ambient ambient-right"></div>
+    <div class="floating-orb orb-one"></div>
+    <div class="floating-orb orb-two"></div>
+    <div class="floating-orb orb-three"></div>
+    <div class="constellation" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <main class="auth-layout">
+      <section class="brand-panel tilt-panel">
+        <div class="hero-graphic" aria-hidden="true">
+          <div class="hero-ring hero-ring-large"></div>
+          <div class="hero-ring hero-ring-small"></div>
+          <div class="hero-core">
+            <span>Live UI</span>
+          </div>
+        </div>
+
+        <p class="eyebrow">Minimal Access</p>
+        <h1>Log in with a calmer interface and a smarter recovery flow.</h1>
+        <p class="brand-copy">
+          A minimalist login page with cursor-reactive motion, layered graphics, OTP verification, instant feedback, and an elegant password recovery path.
+        </p>
+
+        <div class="feature-list">
+          <article class="feature-card tilt-panel">
+            <span class="feature-index">01</span>
+            <div>
+              <h2>Cursor Reactive</h2>
+              <p>Panels tilt with motion while a soft cursor glow and particle trail move across the screen.</p>
+            </div>
+          </article>
+          <article class="feature-card tilt-panel">
+            <span class="feature-index">02</span>
+            <div>
+              <h2>OTP Recovery</h2>
+              <p>Generate, resend, and verify one-time passwords inside the same experience.</p>
+            </div>
+          </article>
+          <article class="feature-card tilt-panel">
+            <span class="feature-index">03</span>
+            <div>
+              <h2>Minimal UI</h2>
+              <p>Clean typography, bold atmosphere, and motion only where it adds energy.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="auth-panel tilt-panel">
+        <div class="panel-header">
+          <div>
+            <p class="panel-label">Secure Portal</p>
+            <h2 id="panelTitle">Welcome back</h2>
+          </div>
+          <div class="status-pill" id="statusPill">Ready</div>
+        </div>
+
+        <div class="panel-stack">
+          <form class="auth-card is-active tilt-panel" id="loginView">
+            <div class="card-heading">
+              <h3>Login</h3>
+              <p>Access your account with your email and password.</p>
+            </div>
+
+            <label class="input-group">
+              <span>Email address</span>
+              <input type="email" id="loginEmail" placeholder="you@example.com" required>
+            </label>
+
+            <label class="input-group">
+              <span>Password</span>
+              <div class="password-wrap">
+                <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                <button type="button" class="ghost-button inline-action" id="togglePassword">Show</button>
+              </div>
+            </label>
+
+            <div class="inline-row">
+              <label class="checkbox-wrap">
+                <input type="checkbox" id="rememberMe">
+                <span>Remember me</span>
+              </label>
+              <button type="button" class="link-button" data-target="forgotView">Forgot password?</button>
+            </div>
+
+            <button type="submit" class="primary-button">Sign In</button>
+
+            <p class="form-footnote">Demo credentials are simulated on the front end for interaction.</p>
+          </form>
+
+          <form class="auth-card tilt-panel" id="forgotView">
+            <div class="card-heading">
+              <h3>Forgot Password</h3>
+              <p>Enter your email to receive a one-time password.</p>
+            </div>
+
+            <label class="input-group">
+              <span>Recovery email</span>
+              <input type="email" id="recoveryEmail" placeholder="Enter your registered email" required>
+            </label>
+
+            <button type="submit" class="primary-button">Send OTP</button>
+
+            <div class="split-actions">
+              <button type="button" class="ghost-button" data-target="loginView">Back to login</button>
+            </div>
+          </form>
+
+          <form class="auth-card tilt-panel" id="otpView">
+            <div class="card-heading">
+              <h3>OTP Verification</h3>
+              <p id="otpInstruction">Enter the 6-digit OTP sent to your email.</p>
+            </div>
+
+            <div class="otp-grid">
+              <input type="text" class="otp-input" maxlength="1" inputmode="numeric">
+              <input type="text" class="otp-input" maxlength="1" inputmode="numeric">
+              <input type="text" class="otp-input" maxlength="1" inputmode="numeric">
+              <input type="text" class="otp-input" maxlength="1" inputmode="numeric">
+              <input type="text" class="otp-input" maxlength="1" inputmode="numeric">
+              <input type="text" class="otp-input" maxlength="1" inputmode="numeric">
+            </div>
+
+            <button type="submit" class="primary-button">Verify OTP</button>
+
+            <div class="otp-tools">
+              <p id="otpTimer">Resend available in 30s</p>
+              <button type="button" class="ghost-button" id="resendOtp" disabled>Resend OTP</button>
+            </div>
+
+            <div class="demo-otp-box">
+              <span>Demo OTP</span>
+              <strong id="otpPreview">------</strong>
+            </div>
+
+            <div class="split-actions">
+              <button type="button" class="ghost-button" data-target="forgotView">Change email</button>
+              <button type="button" class="ghost-button" data-target="loginView">Back to login</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="feedback-box" id="feedbackBox">
+          <p id="feedbackText">Use the flow to test login, recovery, and OTP verification.</p>
+        </div>
+      </section>
+    </main>
+
+    <div class="trail-layer" id="trailLayer" aria-hidden="true"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
